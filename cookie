@@ -1,0 +1,33 @@
+'''
+cookie:存储在客户端的一组键值对
+       标识用户的身份
+'''
+'''
+问题：{'error_description': '遇到错误，请刷新页面或者重新登录帐号后再试', 'error_uri': '/statuses/hot/listV2.json', 'error_data': None, 'error_code': '400016'}
+原因：没有模拟浏览器发请求
+解决：可以把浏览器发请求携带的请求头粘贴到headers字典中
+
+cookie的处理方式：
+1.复制粘贴 （cookie是有时效性的）
+2.自动处理，
+
+'''
+import requests
+url = 'https://xueqiu.com/statuses/hot/listV2.json?since_id=-1&max_id=550023&size=15'
+# headers = {
+#     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
+#     'Cookie':'cookiesu=711695280918033; device_id=094f7ffe9116a8e397687250dcb2a9d4; acw_tc=2760827916971184820005089ee547bfef44ac40996714cd9435c5d409e779; xq_a_token=f56996335e7084331652c772453245851c42d712; xqat=f56996335e7084331652c772453245851c42d712; xq_r_token=68ec0796266e4d11f48e617345e033abbb1e4430; xq_id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1aWQiOi0xLCJpc3MiOiJ1YyIsImV4cCI6MTY5OTQwMzg3MywiY3RtIjoxNjk3MTE4NDI1NjE0LCJjaWQiOiJkOWQwbjRBWnVwIn0.BR4aSRyJ6c2UFzd69F-nDHOo-Jhh8BH7bSszYpSlYT6b5WSRpfDbsUcTiYlUHTy0-azOhnN5KzQdHgoZ2DXz9XYHRYGp_5Dgg5lyn3quk6h3TawbAZUnGinp68rBZovQIRLk2EX1_cYw9RSQYrsNz3btQ-zohim4gX6rGaMZt0_NCyY5RPfBMyF4ZBX2LaOzjVGIsvu7buPBqTxKFsNAJqv4oc-SmvA-S8batOEAcmuG246MLoEy5E179xPICvb7LkxztTrD81DVT4j3rBPe82two_vNQZ5vHQpOR3EYCeQ01k2m2QS2Om771Xz9HJxkRp15nB59lx1XOZXCulp-1g; u=711695280918033; Hm_lvt_1db88642e346389874251b5a1eded6e3=1695280920,1697118483; Hm_lpvt_1db88642e346389874251b5a1eded6e3=1697118483'
+# }
+#
+# #
+# # res = requests.get(url,headers=headers)
+# # print(res.json())
+headers = { 'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36'}
+
+# 自动处理cookie
+session = requests.Session() # 创建session对象
+# 先从目标网站中获取并且存储cookie，
+session.get('https://xueqiu.com/',headers=headers)
+# 发起请求
+page_text = session.get(url,headers=headers).json()
+print(page_text)
