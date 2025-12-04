@@ -1,0 +1,17 @@
+url = 'https://www.baidu.com/'
+
+import requests
+headers = {
+'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36'
+}
+# 在发送请求的时候，携带headers字典
+res = requests.get(url=url,headers=headers)
+# 当前发起请求的请求头信息
+print(res.request.headers)
+# 设置访问服务器的时候，可以自己加上客户端的版本
+
+'''
+python-requests/2.31.0
+Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3-请求和响应2 Mobile/15E148 Safari/604.1
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36
+'''
