@@ -1,0 +1,8 @@
+import requests
+url = 'https://img2.baidu.com/it/u=2243573419,589412055&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
+r = requests.get(url) # 发送请求，响应到是响应对象
+# 不需要设置编码
+# print(r.content)
+# 内容数据写入到文件中
+with open('图片.png', 'wb')as f:
+    f.write(r.content) # 响应对象中内容
